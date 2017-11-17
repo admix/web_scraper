@@ -11,7 +11,7 @@ Web scraper, works with Image, Doc, Video
 ### Usage
 
 ```
-python3.6 scrape.py --url=https://unsplash.com --selector='#gridMulti img' --file_type=image --folder_output='./.images'
+python3.6 scrape.py --url=https://unsplash.com --selector='#gridMulti img' --file_type=image --folder_prefix='./.images'
 ```
 
 ### License

@@ -13,7 +13,7 @@ Usage: scrape.py [OPTIONS]
 Options:
   --url TEXT           Website that you want to scrape
   --file_type TEXT     Type of files you want to scrape (Image, Doc, Video)
-  --folder_output TEXT Path to folder where to save scraped files
+  --folder_prefix TEXT Folder prefix, where files will go
   --help               Show this message and exit.
 """
 
@@ -60,9 +60,9 @@ def create_folder(folder):
 @click.option('--url', default='https://unsplash.com', help='Website that you want to scrape')
 @click.option('--selector', default='#gridMulti img', help='Selector to where to get stuff from website')
 @click.option('--file_type', default='image', help='Type of files you want to scrape (Image, Doc, Video)')
-@click.option('--folder_prefix', default='./.images', help='Path to folder where to save scraped files')
+@click.option('--folder_prefix', default='./.images', help='Folder prefix, where files will go')
 def scrape(url, selector, file_type, folder_prefix):
-  folder = './.' + build_folder(folder_prefix, url)
+  folder = './.dir-' + build_folder(folder_prefix, url)
   create_folder(folder)
   if file_type == 'image':
     get_images(url, selector, folder)
