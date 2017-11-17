@@ -43,6 +43,13 @@ def get_images(url, selector, folder_output):
       image.save(folder_output + "/image_" + str(i) + "." + image.format, image.format)
 
 
+def build_folder(folder_prefix, url):
+  name = url
+  if 'http' in url:
+    name = url.split('.')[0].split('/')[-1]
+  return folder_prefix + "-" + name
+
+
 def create_folder(folder):
   # create a directory for future images
   if not os.path.exists(folder):
@@ -53,11 +60,12 @@ def create_folder(folder):
 @click.option('--url', default='https://unsplash.com', help='Website that you want to scrape')
 @click.option('--selector', default='#gridMulti img', help='Selector to where to get stuff from website')
 @click.option('--file_type', default='image', help='Type of files you want to scrape (Image, Doc, Video)')
-@click.option('--folder_output', default='./.images', help='Path to folder where to save scraped files')
-def scrape(url, selector, file_type, folder_output):
-  create_folder(folder_output)
+@click.option('--folder_prefix', default='./.images', help='Path to folder where to save scraped files')
+def scrape(url, selector, file_type, folder_prefix):
+  folder = './.' + build_folder(folder_prefix, url)
+  create_folder(folder)
   if file_type == 'image':
-    get_images(url, selector, folder_output)
+    get_images(url, selector, folder)
 
 if __name__ == '__main__':
   scrape()
